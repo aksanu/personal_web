@@ -14,15 +14,15 @@ def home(request):
 		json_data = json.loads(url.text )
 		joke= json_data.get('value').get('joke')
 		joker=True
-		return render(request, 'index.html', {'joke':joke, 'joker':joker})
+		return render(request, 'portfolio/index.html', {'joke':joke, 'joker':joker})
 
 	else:
-		return render(request, 'index.html')
+		return render(request, 'portfolio/index.html')
 	
 
 
 def portfolio(request):
-	return render(request,'portfolio.html')
+	return render(request,'portfolio/portfolio.html')
 
 def hire_me(request):
 	submit=False
@@ -35,7 +35,7 @@ def hire_me(request):
 		submit=True
 	
 
-	return render(request,'hireme.html', {'submit':submit})
+	return render(request,'portfolio/hireme.html', {'submit':submit})
 
 import  requests
 import json
@@ -61,7 +61,7 @@ def dictionary(request):
 			j=i
 		if j=='error':
 			status=True
-			return render(request, 'dictionary.html',{'status':status})
+			return render(request, 'portfolio/dictionary.html',{'status':status})
 		else:
 			syn=''
 			etymologies=r['results'][0].get('lexicalEntries')[0].get('entries')[0].get('etymologies')
@@ -87,5 +87,5 @@ def dictionary(request):
 			except TypeError:
 				new_word='none'
 
-			return render(request, 'dictionary.html', {'etymologies':syn , 'mean':mean , 'new_word':new_word , 'status':status, 'word':word})
-	return render(request, 'dictionary.html')
+			return render(request, 'portfolio/dictionary.html', {'etymologies':syn , 'mean':mean , 'new_word':new_word , 'status':status, 'word':word})
+	return render(request, 'portfolio/dictionary.html')
