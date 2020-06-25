@@ -1,0 +1,40 @@
+{%extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-inline" method="post" style='margin-top: 100px'>
+				  {%csrf_token%}
+				  <div class="form-group mx-sm-3 mb-2">
+				    <label for="inputPassword2" class="sr-only">Word</label>
+				    <input type="text" class="form-control" id="inputPassword2" placeholder="Search Word" name="word">
+				  </div>
+				  <button type="submit" class="btn btn-primary mb-2">Search</button>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<div class="card" style='margin-top: 100px'>
+					{%if status %}
+					<h5 class="card-header">Word Not Found</h5>
+					{%else%}
+					<h5 class="card-header">{{word|title}}</h5>
+					<div class="card-body">
+				    <p class="card-text">Etymology: {{etymologies|title}}</p>
+				    <p class="card-text">Meaning: {{mean|title}}</p>
+				    <p class="card-text">{% if new_word != 'none'%}
+				Example: {{new_word|title}}</p>
+				{%else%}
+				
+				{%endif%}
+
+			{%endif%}
+				   
+				  </div>
+			</div>
+			
+		</div>
+	</div>
+
+</div>
+{% endblock %}
